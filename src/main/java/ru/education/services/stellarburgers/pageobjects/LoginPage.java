@@ -1,5 +1,6 @@
 package ru.education.services.stellarburgers.pageobjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,11 +34,13 @@ public class LoginPage {
     //ссылка Восстановить пароль
     private final static By passwordResetLink = By.linkText("Восстановить пароль");
 
+    @Step("Go to registration page from login page")
     public RegisterPage goToRegisterPage() {
         driver.findElement(registerLink).click();
         return new RegisterPage(driver);
     }
 
+    @Step("Check is login page is displayed")
     public boolean isLoginPageIsDisplayed() {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOfElementLocated(loginPageHeader));
@@ -47,6 +50,7 @@ public class LoginPage {
         }
     }
 
+    @Step("Login user")
     public MainPage enterAccount(String email, String password){
         new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOfElementLocated(emailInput));
         driver.findElement(emailInput).sendKeys(email);
@@ -55,11 +59,11 @@ public class LoginPage {
         return new MainPage(driver);
     }
 
+    @Step("Go to reset password page")
     public PasswordResetPage goToResetPasswordPage() {
         new WebDriverWait(driver,Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOfElementLocated(passwordResetLink));
         driver.findElement(passwordResetLink).click();
         return new PasswordResetPage(driver);
-
     }
 
 }

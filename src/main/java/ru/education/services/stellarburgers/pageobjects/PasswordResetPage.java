@@ -1,5 +1,6 @@
 package ru.education.services.stellarburgers.pageobjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,6 +25,7 @@ public class PasswordResetPage {
     //сслыка Войти
     private final static By enterLink = By.linkText("Войти");
 
+    @Step("Go to 'login page' by clicking on 'Enter' link on 'password reset page'")
     public LoginPage goToLoginPageFromPasswordResetPage() {
         new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOfElementLocated(enterLink));
         driver.findElement(enterLink).click();
